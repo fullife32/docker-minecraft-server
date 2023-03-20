@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Reset
+Color_Off='\033[0m'       # Text Reset
+
+# Regular Colors
+Red='\033[0;31m'          # Red
+Yellow='\033[0;33m'       # Yellow
+Green='\033[0;32m'        # Green
+
 TIME=$(date +"%Y-%m-%d_%H.%M.%S")
 B_DIR=backups/${TIME}
 B_WORLDDIR=${B_DIR}/world
@@ -16,13 +24,16 @@ if [ -d ${M_WORLDDIR} ]; then
     if [ -d ${M_LOGDIR} ]; then
         cp -R ${M_LOGDIR} ${B_LOGDIR}
     else
-        echo "No logs to backup at '${M_LOGDIR}'"
+        echo "${Red}No logs to backup at ${M_LOGDIR}!"
     fi
 
     cp ${M_DIR}/banned-ips.json ${M_DIR}/banned-players.json ${M_DIR}/ops.json ${M_DIR}/server-icon.png ${M_DIR}/server.properties ${M_DIR}/usercache.json ${M_DIR}/whitelist.json ${B_DIR}
 
-    SIZE=$(du -hs ${B_DIR})
-    echo "Successfully backed up: ${SIZE}"
+    if [ $? == 0 ]; then
+        SIZE=$(du -hs ${B_DIR})
+        echo "${Green}Successfully backed up: ${SIZE} !"
+    fi
 else
-	echo "No world to backup at '${M_WORLDDIR}'"
+	echo "${Red}No world to backup at ${M_WORLDDIR}!"
+    exit -1
 fi
