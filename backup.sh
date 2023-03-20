@@ -19,7 +19,7 @@ else
 fi
 
 if [ -d ${M_LOGDIR} ]; then
-    cp -R "${M_LOGDIR}" "${B_LOGDIR}"
+    cp -R ${M_LOGDIR} ${B_LOGDIR}
 else
 	echo "No logs to backup at '${M_LOGDIR}'"
 fi
