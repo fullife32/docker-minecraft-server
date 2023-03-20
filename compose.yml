@@ -1,12 +1,25 @@
 version: '1'
 services:
   minecraft-server:
-    image: debian:latest
+    image: alpine:latest
     volumes:
       - ./minecraft:/minecraft
       - ./scripts:/home/scripts
     ports:
       - 25565:25565
     working_dir: /home/scripts
-    entrypoint: ["bash", "setup.sh"]
+    entrypoint: ["sh", "setup.sh"]
     restart: unless-stopped
+
+# version: '1'
+# services:
+#   minecraft-server:
+#     image: ubuntu:latest
+#     volumes:
+#       - ./minecraft:/minecraft
+#       - ./scripts:/home/scripts
+#     ports:
+#       - 25565:25565
+#     working_dir: /home/scripts
+#     entrypoint: ["sh", "setup.sh"]
+#     restart: unless-stopped
